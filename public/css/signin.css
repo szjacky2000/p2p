@@ -1,0 +1,375 @@
+input{
+	outline: none;
+}
+#cover{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background: #0000007a;
+	
+}
+.cover_box{
+	height: 340px;
+	width: 440px;
+	background-color: #FFFFFF;
+	position: absolute;
+	top:50%;
+	left: 50%;
+	margin-top: -220px;
+	margin-left: -170px;
+	border-radius: 5px;
+	box-sizing: border-box;
+	padding: 20px;
+}
+.cover_box p{
+	width: 350px;
+	height: 50px;
+	line-height: 50px;
+	margin: 0 auto;
+	text-align: left;
+	border-bottom:  1px solid #ccc;
+}
+.cover_box p input{
+	width: 300px;
+	border: 0;
+	font-size: 14px;
+	outline:none;
+	color: #c9c9c9;
+}
+.cover_box h3{
+	color: #F08E23;
+	width: 350px;
+	text-align: center;
+	margin: 0 auto;
+	margin-bottom:15px;
+	font-size: 24px;
+}
+.cover_a1{
+	display: block;
+	height: 50px;
+	width: 350px;
+	text-align: center;
+	line-height: 50px;
+	margin:  0 auto;
+	background: #F08E23;
+	color: #FFFFFF;
+	font-size: 20px;
+	margin-top: 30px;
+	border-radius: 5px;
+}
+.cover_box p.co_p_last{
+	border: 0;
+}
+.cover_a2{
+	display: block;
+	height: 20px;
+	width: 50px;
+	text-align: center;
+	line-height: 20px;
+	font-size: 12px;
+	float: left;
+	margin-top: 20px;
+	color: #abc7e9;
+}
+.cover_a3{
+	display: block;
+	height: 20px;
+	width: 50px;
+	text-align: center;
+	line-height: 20px;
+	font-size: 12px;
+	float: right;
+	margin-top: 20px;
+	color: #abc7e9;
+}
+.cover_box p.co_p_last span{
+	display: block;
+	height: 20px;
+	width: 80px;
+	text-align: center;
+	line-height: 20px;
+	font-size: 12px;
+	float: right;
+	margin-top: 20px;
+	color: #c9c9c9;
+}
+.cover_a4{
+	display: block;
+	height: 40px;
+	width: 300px;
+	text-align: center;
+	line-height: 40px;
+	margin:  0 auto;
+	background: #F08E23;
+	color: #FFFFFF;
+	font-size: 16px;
+	margin-top: 30px;
+	border-radius: 5px;
+}
+.cover_a5{
+	display: block;
+	height: 20px;
+	width: 85px;
+	font-size: 16px;
+	float: left;
+	text-align: center;
+	color: #c9c9c9;
+}
+.cover_a6{
+	display: block;
+	height: 30px;
+	width: 100px;
+	text-align: center;
+	line-height: 30px;
+	float: right;
+	border: 1px solid #F08E23;
+	color: #F08E23;
+	font-size: 12px;
+	border-radius: 5px;
+	margin-top: 10px;
+}
+.ph_img{
+	width: 320px;
+	height: 180px;
+	margin: 0 auto;
+	border: 1px solid #F08E23;
+	border-radius: 5px;
+	margin-top: 20px;
+}
+#signin_box{
+	width: 100%;
+	background: url(../../../../img/banner-320.png) no-repeat;
+	height: 520px;
+	background-size: 100% 100%;
+}
+.box_c{
+	position: relative;
+	width: 1200px;
+	margin: 0 auto;
+	height: 520px;
+}
+.signin_dl{
+	position: absolute;
+	height:465px;
+	width: 400px;
+	background-color: #FFFFFF;
+	right: 0;
+	top: 30px;
+	border-radius: 5px;
+	box-sizing: border-box;
+	padding: 20px;
+}
+.signin_top{
+	height: 40px;
+	border-bottom: 1px solid #c0c0c0;
+	width: 100%;
+	font-size: 20px;
+}
+.signin_top_input1{
+	width:305px;
+	height:46px;
+	border:1px solid #b0b0b0;
+	margin-top:32px;
+	background:url(../img/login.jpg) no-repeat 10px 14px;
+	padding-left:45px;
+}
+.signin_top_input2{
+	width:305px;
+	height:46px;
+	border:1px solid #b0b0b0;
+	margin-top:20px;
+	background:url(../img/login1.jpg) no-repeat 10px 14px;
+	padding-left:45px;
+}
+.signin_top_input3{
+	width:110px;
+	height:46px;
+	border:1px solid #b0b0b0;
+	margin-top:20px;
+	background: no-repeat 10px 14px;
+	padding-left:20px;
+	float:left;
+}
+.signin_top_div{
+	width:200px;
+	height:48px;
+	background:#bdbdbd;
+	float:left;
+	margin-left:12px;
+	position: relative;
+	border:1px solid #b0b0b0;
+	border-left:none;
+	margin-top:20px;
+}
+.signin_top_div a{
+	font-size:18px;
+	color:#FFFFFF;
+	position: absolute;
+	left:76px;
+	top:12px;
+}
+.signin_top_input4{
+	margin-top:20px;
+	width:20px;
+	height:20px;
+}
+.signin_top_a{
+	font-size:14px;
+	color:#6e6e6e;
+	position:absolute;
+	top:302px;
+}
+.signin-bottom{
+	display: block;
+	height: 46px;
+	width: 348px;
+	text-align: center;
+	line-height: 46px;
+	margin:  0 auto;
+	background: #ff9619;
+	color: #feffff;
+	font-size: 16px;
+	margin-top: 15px;
+	border-radius: 4px;
+	border:none;
+}
+.signin-bottom_div{
+	position:relative;
+}
+.signin-bottom_a2{
+	font-size:14px;
+	color:#2983d1;
+	position:absolute;
+	left:5px;
+	top:35px;
+}
+.signin-bottom_a3{
+	font-size:14px;
+	color:#818181;
+	position:absolute;
+	right:60px;
+    top:35px;
+}
+.signin-bottom_a4{
+	font-size:14px;
+	color:#2983d1;
+	position:absolute;
+	top:35px;
+	right:0;
+}
+button{
+	outline: none;
+}
+#signin_box1{
+	width: 100%;
+	background: url(../../../../img/banner-320.png) no-repeat;
+	height: 520px;
+	background-size: 100% 100%;
+}
+.box_c1{
+	position: relative;
+	width: 1200px;
+	margin: 0 auto;
+	height: 520px;
+}
+.signin_dl1{
+	position: absolute;
+	height:310px;
+	width: 306px;
+	background-color: #21235c;
+	right: 0;
+	top: 100px;
+	box-sizing: border-box;	
+}
+.signin_dl_header1{
+	width:305px;
+	height:110px;
+	overflow: hidden;
+	position: relative;
+}
+.signin_dl_header1 p:nth-child(1){
+	color:#fff;
+	font-size:14px;
+	position: absolute;
+	left:30px;
+	top:34px;
+}
+.signin_dl_header1 p:nth-child(2){
+	color:#fff;
+	font-size:12px;
+	position: absolute;
+	left:30px;
+	top:60px;
+}
+.signin_dl_header1 img{
+	position: absolute;
+	right:34px;
+	top:58px;
+}
+.signin_dl_top1{
+	width:305px;
+	height:120px;
+	position:relative;
+}
+.signin_dl_top1 p:nth-child(1){
+	color:#fff;
+	font-size:12px;
+	position: absolute;
+	left:30px;
+	top:0px;
+}
+.signin_dl_top1 p:nth-child(2){
+	color:#7f0800;
+	font-size:12px;
+	position: absolute;
+	left:30px;
+	top:24px;
+}
+.signin_dl_top1 p:nth-child(3){
+	color:#fff;
+	font-size:12px;
+	position: absolute;
+	left:30px;
+	top:54px;
+}
+.signin_dl_top1 img{
+	position: absolute;
+	right:30px;
+	top:2px;
+}
+.signin_dl_bottom1{
+	width:305px;
+	height:80px;	
+}
+.signin_dl_bottom1 button:nth-child(1){
+	width:112px;
+	height:40px;
+	background:#ea6427;
+	float: left;
+	margin-left:30px;
+	text-align: center;
+	border:none;
+	margin-right:22px;
+	border-radius: 3px;
+}
+.signin_dl_bottom1 button:nth-child(1) a{
+	font-size:14px;
+	color:#fff;
+	line-height: 40px;
+}
+.signin_dl_bottom1 button:nth-child(2){
+	width:112px;
+	height:40px;
+	background:#f79f09;
+	float: left;
+	text-align: center;
+	border:none;
+	border-radius: 3px;
+}
+.signin_dl_bottom1 button:nth-child(2) a{
+	font-size:14px;
+	color:#fff;
+	line-height: 40px;
+}

@@ -1,0 +1,38 @@
+
+input,button{
+	outline: none;
+}
+#register_box{
+	width: 100%;
+	background: url(../../../../img/banner-320.jpg) no-repeat;
+	height: 520px;
+	background-size: 100% 100%;
+	overflow: hidden;
+}
+.register_c{
+	width:1200px;
+	height:465px;
+	background:#fff;
+	border:1px solid #e4e4e4;
+	margin:auto;
+    margin-top:30px;
+    border-radius:5px;
+}
+.register_top0 a{cursor:pointer;}
+.register_top0 a.on{color:orange;}
+#contentBox{width:100%;height:407px;margin-top:-22px}
+#contentBox .box{text-align:center;font-weight:blod;display:none;}
+#contentBox .box.active{display:block;}
+
+.register1_top1{
+	float: left;
+	color:#343434;
+	position: absolute;
+	left:45px;
+}
+.register2_top2{
+	float: left;
+	color:#343434;
+	position: absolute;
+	left:150px;
+}

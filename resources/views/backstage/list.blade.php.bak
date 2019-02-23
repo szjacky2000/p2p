@@ -1,0 +1,30 @@
+@extends('layouts.app')
+
+@section('title', '抵押清单')
+
+@section('content')
+    
+    
+
+    <table class="layui-hide" id="test111"></table>
+    <script>
+
+layui.use('table', function(){
+    alert('123');
+  var table = layui.table;
+  var domain = document.domain;
+  console.log(domain);
+  table.render({
+    elem: '#test111'
+    ,url:'Backstage/list'
+    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+    ,cols: [[
+      {field:'id', width:80, title: 'ID', sort: true}
+      ,{field:'depart_name', width:80, title: 'depart_name'}
+    ]]
+  });
+});
+</script>
+    
+@endsection
+
