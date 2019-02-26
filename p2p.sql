@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.23, for FreeBSD11.2 (amd64)
+-- MySQL dump 10.13  Distrib 5.7.25, for Linux (x86_64)
 --
 -- Host: localhost    Database: p2p
 -- ------------------------------------------------------
--- Server version	5.7.23-log
+-- Server version	5.7.25-0ubuntu0.18.10.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,14 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
-SET @@SESSION.SQL_LOG_BIN= 0;
-
---
--- GTID state at the beginning of the backup 
---
-
-SET @@GLOBAL.GTID_PURGED='ceeaa91c-de5e-11e8-b5a7-507b9d7f42f6:1-317';
 
 --
 -- Table structure for table `accounts`
@@ -42,7 +34,8 @@ CREATE TABLE `accounts` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '账号创建日期',
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '账号更新日期',
   `qq` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `index_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -67,12 +60,12 @@ CREATE TABLE `collaterals` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `pid` tinyint(4) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(3) NOT NULL DEFAULT '0' COMMENT '-1删除',
+  `status` tinyint(4) NOT NULL,
   `user_id` tinyint(4) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,31 +74,40 @@ CREATE TABLE `collaterals` (
 
 LOCK TABLES `collaterals` WRITE;
 /*!40000 ALTER TABLE `collaterals` DISABLE KEYS */;
-INSERT INTO `collaterals` VALUES (4,2,'戒指1',1,3,'2018-12-26 01:49:49',NULL),(5,1,'项链1',1,3,'2018-12-26 01:53:05',NULL),(9,0,'啥爱仕达多',-1,3,NULL,'2018-12-26 22:30:06'),(10,9,'123',1,3,'2018-12-26 22:30:40',NULL),(11,0,'123123阿达',1,3,'2018-12-26 22:37:57','2018-12-26 22:46:33'),(12,0,'发送',1,3,'2018-12-26 22:50:01',NULL),(13,0,'123',1,3,'2018-12-26 23:02:15',NULL),(14,0,'房产2',-1,1,'2018-12-27 07:14:20','2018-12-27 07:53:11'),(15,0,'123',1,3,'2018-12-27 08:07:46',NULL);
+INSERT INTO `collaterals` VALUES (1,1,'钻石',1,1,NULL,NULL),(2,1,'蓝宝石',1,1,NULL,NULL),(3,1,'宝马5系列',1,2,NULL,NULL);
 /*!40000 ALTER TABLE `collaterals` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `depart`
+-- Table structure for table `loans`
 --
 
-DROP TABLE IF EXISTS `depart`;
+DROP TABLE IF EXISTS `loans`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `depart` (
-  `id` tinyint(4) NOT NULL AUTO_INCREMENT,
-  `depart_name` varchar(255) DEFAULT NULL COMMENT '部门',
+CREATE TABLE `loans` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `amount` int(6) NOT NULL COMMENT '借款金额',
+  `period` int(5) NOT NULL COMMENT '借款期限',
+  `mortgage` tinyint(1) NOT NULL COMMENT '借款类型（1月/2天)',
+  `type` tinyint(1) NOT NULL COMMENT '1:投资客\n2:借款人',
+  `status` tinyint(1) NOT NULL COMMENT '1:使用中\n2:审核中的',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建日期',
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '更新日期',
+  `user_id` int(6) DEFAULT NULL COMMENT '用户ID',
+  `remarks` varchar(30) DEFAULT NULL COMMENT '审核状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `depart`
+-- Dumping data for table `loans`
 --
 
-LOCK TABLES `depart` WRITE;
-/*!40000 ALTER TABLE `depart` DISABLE KEYS */;
-/*!40000 ALTER TABLE `depart` ENABLE KEYS */;
+LOCK TABLES `loans` WRITE;
+/*!40000 ALTER TABLE `loans` DISABLE KEYS */;
+INSERT INTO `loans` VALUES (1,25000,1,1,2,3,'2019-02-26 17:57:53','2019-02-26 18:02:38',1,'审核未通过');
+/*!40000 ALTER TABLE `loans` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -120,7 +122,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +131,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (3,'2016_01_04_173148_create_admin_tables',2),(6,'2014_10_12_000000_create_users_table',3),(7,'2014_10_12_100000_create_password_resets_table',3);
+INSERT INTO `migrations` VALUES (3,'2016_01_04_173148_create_admin_tables',2),(6,'2014_10_12_000000_create_users_table',3),(7,'2014_10_12_100000_create_password_resets_table',3),(8,'2015_12_21_111514_create_sms_table',4),(9,'2018_12_21_081324_create_collateral_table',5);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,19 +197,23 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `idn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `flag` tinyint(1) DEFAULT '1' COMMENT '1:投资客2:借款人',
+  `idn` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '身份证号码',
+  `flag` tinyint(1) DEFAULT '1' COMMENT '1:个人2:企业',
   `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `pay_password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '支付密码',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `pay_password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '支付密码',
+  `addr` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '地址',
+  `status` tinyint(1) DEFAULT NULL COMMENT '注册用户状态',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `un_phone` (`phone`),
+  KEY `index_name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,10 +222,9 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'张华明','18948197961',NULL,1,'chinapressman@hotmail.com',NULL,'$2y$10$geSDdj5Qd1uOD.tfQ6Q4vOoHLc/Cu5NIdUeI/FiqIjYj0CB8dLXXy','pxceVs0lr02O3Y7kJ7r7k6KRoXq6k5X3xy75g2H0zkZZUdKYqRkHLo5lTLYf','2018-11-14 19:51:28','2018-11-14 19:51:28',''),(2,'王盟','15013217646','431121199505107719',1,NULL,NULL,'$2y$10$iHqKO41S87rQ3RmH/G8Z7.9h/9O7MrThMfgeCGSYMGq7bZwKJQjji','CPEIDvUxvN6QAz0ngZACX4PV7nd6iG3CpADyTz7ehgx0MFP5BEYd66QgUmR8','2018-12-25 18:13:59','2018-12-25 18:13:59','$2y$10$ocAvjKzQBIEgh2qIdUsXYeYzqmgj0YNusCCagkX8UZa/GUYypyWc2'),(3,'心','17603846938','431121199505107719',1,NULL,NULL,'$2y$10$RAhMBTM7G3OEgApki7UxO.WKGNV.eOKAekrEiaQGW0Uoh2zJMKIFO',NULL,'2018-12-25 22:50:31','2018-12-25 22:50:31','$2y$10$lYostaoiq6d2GhGxkMm.geUXY0iHQsURr7HnJ4YFl55KU5hRYfZPa');
+INSERT INTO `users` VALUES (1,'张华明','18948197961','420982197404110075',1,NULL,NULL,'$2y$10$9/96CGgUQHt8MVMLZ612xuU.2P7BDoeatBScvndXcW6M1jOzDLQ3O','9ajsNWOU8y8SQQvtvd9wu605wNScecpp93DZ0ljHKGjcUZ5ZHjm5PqAHq77E','2019-02-26 06:28:33','2019-02-26 06:30:50','$2y$10$CN5v/8gNYd9p8QxosKgoueGEb/bXFPMr9Ig1ksip2UeSY7EKuZ5au','gd',2),(2,'张华明','13700137000',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'gd',NULL),(3,'张华明','13714712323',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'gd',NULL),(4,'张华明','150015000',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'gd',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
-SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -230,4 +235,4 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-27 17:33:34
+-- Dump completed on 2019-02-26 18:08:40
