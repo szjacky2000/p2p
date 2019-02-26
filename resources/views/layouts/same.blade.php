@@ -9,7 +9,6 @@
 	<link rel="stylesheet" type="text/css" href="../css/register.css"/>
 	<link rel="stylesheet" type="text/css" href="../css/layer.css"/>
 	<script type="text/javascript" src="../js/jq.js" ></script>
-	<script type="text/javascript" src="../js/yanzhen.js" ></script>
 	<script type="text/javascript">			
 			$(function(){
 				    $(".register_top0 a").off("click").on("click",function(){

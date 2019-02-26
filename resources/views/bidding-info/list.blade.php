@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="../js/layui/css/layui.css">
 <div id="fb">
     <div class="fblc_2">
-        <form method="POST" action="{{ url('loan/list') }}">
+        <form method="POST" action="{{ url('loan/add') }}">
             @csrf
         <div class="fblc_left">
             <p>

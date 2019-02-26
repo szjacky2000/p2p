@@ -12,16 +12,12 @@ Route::post('register_3','Auth\RegisterController@reg_3')->name('reg_3');
 Route::get('success_register','Auth\RegisterController@success_register')->name('success_register');
 Route::post('success_register','Auth\RegisterController@success_register')->name('success_register');
 
-
-
 Route::get('personcenter','HomeController@personcenter');
-
-
 
 Route::get('reg_enterprise','Auth\RegisterController@reg_4')->name('reg_enterprise');
 
-
-
 Route::get('exit','Auth\LoginController@logout')->name('exit');
 
-Route::get('userinfo','Auth\RegisterController@userinfo');
+
+Route::get('personcenter','HomeController@personcenter')->name('personcenter');
+

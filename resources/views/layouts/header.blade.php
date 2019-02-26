@@ -30,13 +30,13 @@
 		</div>
 		<div class="signin_2">
 			@guest
-				<a href="{{ route('login') }}">{{ __('登录') }}</a>
-				<a href="{{ route('reg_1') }}">{{ __('注册') }}</a>
+			<a href="{{ route('login') }}">{{ __('登录') }}</a>
+			<a href="{{ route('reg_1') }}">{{ __('注册') }}</a>
 			@endguest
-            @if(auth()->user())
-            		<a>{{ isset($_COOKIE['name'])?$_COOKIE['name']:'' }}</a>
-                    <a href="{{ route('exit') }}">{{ __('退出') }}</a>
-            @endif
+			@auth
+				<a> {{ session('username') }} </a>
+				<a href="{{ route('exit') }}">{{ __('退出') }}</a>
+			@endauth
 		</div>
 	</div>			
 </div>

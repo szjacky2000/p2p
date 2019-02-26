@@ -7,7 +7,7 @@
             <div class="box_c1">
                 <div class="signin_dl1">
                     <div class="signin_dl_header1">
-                        <p>欢迎回来,</p>
+                        <p>欢迎: {{ session('username') }}回来,</p>
                         <p>{{ isset($_COOKIE['phone'])?$_COOKIE['phone']:'' }}</p>
                         <img src="../img/huiyuan.png"/>
                     </div>

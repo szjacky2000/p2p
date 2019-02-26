@@ -13,7 +13,7 @@ use App\User;
 class LoanController extends Controller
 {
 
-    const QUOTA = 200000; //个人额度为20万
+    const QUOTA = 200000; //个人额度为20万,企业为100万 富友规则，银行存管不详！
 
     public function __construct(){
 
@@ -34,7 +34,6 @@ class LoanController extends Controller
 
             if(false == Auth::check()){
 
-                if($request->isMethod('post')){
                     //添加用户资料
                     $user_info['name']   = $request->input('name');
                     $user_info['addr']   = $request->input('addr');
@@ -42,17 +41,16 @@ class LoanController extends Controller
                     if(!empty($user_info['name'])) {
                         //check phone Duplicate entry
                         $exists_phone = DB::table('users')->where('phone', $user_info['phone'])->exists();
-                        if($exists_phone) return '手机号重复了！';
+                        if($exists_phone) return $exists_phone . ' = 手机号重复了！';
                         else  $user_id = DB::table('users')->insertGetId($user_info);
                     }
-                    else return view('bidding-info.loan');
+                    else {
+                        return view('bidding-info.loan');
+                    }
 
-                }else{
-                    return view('bidding-info.loan');
-                }
             }else $user_id = Auth::id();
 
-            $user = User::find($user_id); /////////////
+            $user = User::find($user_id);
             $user->addr   = $request->input('addr');
             $user->status = 2;
             $user->save();
@@ -73,7 +71,6 @@ class LoanController extends Controller
 
             DB::table('loans')->insert($loan_info);
             return redirect('loan/list');
-
 
         }
         return view('bidding-info.list');

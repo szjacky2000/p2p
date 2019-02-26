@@ -151,9 +151,5 @@ class RegisterController extends Controller
 
     }
 
-    public function userinfo(){
-        return $_SERVER;
-    }
-
 
 }
