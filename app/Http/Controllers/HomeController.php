@@ -25,7 +25,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $request->session()->put('user_info', Auth::user());
+        $user_info = Auth::user();
+        $request->session()->put('username', $user_info->name);
+        $request->session()->put('phone', $user_info->phone);
         return view('auth.login_success');
     }
 

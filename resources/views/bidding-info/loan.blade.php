@@ -80,6 +80,8 @@
                     </select>
                     <select>
                         <option>罗湖区</option>
+                        <option>福田区</option>
+                        <option>南山区</option>
                     </select>
                 </label>
             </p>
@@ -89,8 +91,8 @@
                 <span>借款期限</span>
                 <label style="width: 200px;"><input type="number" name="period" id="" value="{{ old('period') }}" placeholder="请输入借款的期限" style="width: 150px;"/></label>
                 <select name="mortgage" style="width: 50px;margin-left: 27px;margin-top: 5px;">
-                    <option value="1">天</option>
-                    <option value="2">月</option>
+                    <option value=1>月</option>
+                    <option value=2>天</option>
                 </select>
             </p>
 

@@ -9,6 +9,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -33,41 +34,24 @@ class Loan extends Model
         return $this->hasOne('App\User');
     }
 
-
     private function is_name_exists($name){
-        return DB::table('loans')->where($name, 1)->exists();
+        return DB::table('user')->where('name', $name)->exists();
     }
 
-    private function is_phone_exists($phone){
-        return DB::table('loans')->where($phone, 1)->exists();
+    public function is_phone_exists($phone){
+        return DB::table('users')->where('phone', $phone)->exists();
     }
+
     //是否在登陆状态借款
-
     private function is_login()
     {
         return Auth::check();
     }
-
-
-    //是否已有借款
-    public function exists()
+    
+    //登陆状态是否借款
+    public function is_mortgage()
     {
-        $status = false;
-
-        if($this->is_login()){
-            $user  = Auth::user();
-            $name  = isset($user['name'])  ? $user['name']  : '';
-            $phone = isset($user['phone']) ? $user['phone'] : '';
-            return DB::table('loans')->where($phone, 1)->exists();
-        }else{
-            //
-
-        }
-        if(!empty($name))  return $this->is_name_exists($name);
-        if(!empty($phone)) return $this->is_phone_exists($phone);
-
-        return status;
+        return ($this->is_login()) ? DB::table('loans')->where('user_id', Auth::id())->exists() : -1;
     }
-
 
 }

@@ -49,6 +49,8 @@
                     </select>
                     <select>
                         <option>罗湖区</option>
+                        <option>福田区</option>
+                        <option>南山区</option>
                     </select>
                 </label>
             </p>
@@ -58,8 +60,8 @@
                 <span>借款期限</span>
                 <label style="width: 200px;"><input type="number" name="period" id="" value="{{ old('period') }}" placeholder="请输入借款的期限" style="width: 150px;"/></label>
                 <select style="width: 50px;margin-left: 27px;margin-top: 5px;">
-                    <option value="m">月</option>
-                    <option value="d">天</option>
+                    <option value=1>月</option>
+                    <option value=2>天</option>
                 </select>
             </p>
             @if (false == Auth::check())
@@ -101,19 +103,18 @@
                     {field:'id',          title: 'ID',     width:80, sort: true}
                     ,{field:'amount',     title: '金额',    width:80   }
                     ,{field:'period',     title: '借款期限', width:120  }
-                    ,{field:'mortgage',   title: '借款类型', width:120  }
+                    ,{field:'mortgage',   title: '日期类型', width:120  }
                     ,{field:'type',       title: '投资',    width: 80,  minWidth: 100}
                     ,{field:'created_at', title: '借款日期', width: 160,}
                     ,{field:'updated_at', title: '修改日期', width: 160,}
                     ,{field:'name',       title: '借款人'}
                     ,{field:'status',     title: '审核', width:140, templet: '#checkboxTpl', unresize: true}
-                    ,{field:'msg',        title: '备注消息',th:137,}
+                    ,{field:'remarks',    title: '备注消息',th:137,}
                 ]]
                 ,page: true
             });
             //监听审查操作
             form.on('checkbox(verify_loans)', function(obj){
-                // layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
                 var id = this.value;
                 $.ajax({
                     headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -124,7 +125,7 @@
                     },
                     success: function (data) {
                         if (data.message == 'error') {
-                            layer.msg(data.msg, {icon: 5});//失败的表情
+                            layer.msg(data.msg, {icon: 5});
                             o.removeClass('layui-btn-disabled');
                             return;
                         } else{
@@ -133,7 +134,6 @@
                         }
                     },
                 });
-
             });
         });
     </script>

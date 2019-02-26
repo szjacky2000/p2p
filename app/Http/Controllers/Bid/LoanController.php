@@ -28,6 +28,8 @@ class LoanController extends Controller
 
         if ($request->isMethod('post')) {
 
+            $loan = new Loan();
+
             /**
              * 查找是否已经有借             *
              **/
@@ -37,23 +39,18 @@ class LoanController extends Controller
                     //添加用户资料
                     $user_info['name']   = $request->input('name');
                     $user_info['addr']   = $request->input('addr');
-                    $user_info['phone']       = $request->input('phone');
-                    if(!empty($user_info['name'])) {
-                        //check phone Duplicate entry
-                        $exists_phone = DB::table('users')->where('phone', $user_info['phone'])->exists();
-                        if($exists_phone) return $exists_phone . ' = 手机号重复了！';
-                        else  $user_id = DB::table('users')->insertGetId($user_info);
+                    $user_info['phone']  = $request->input('phone');
+                    $user_info['status'] = $request->input('status');
+
+                    if(!empty($user_info['phone'])) {
+
+                        $res = $loan->is_phone_exists($user_info['phone']);
+                        if($res == 1) return '手机号重复了！';
+                        else $user_id = DB::table('users')->insertGetId($user_info);
                     }
-                    else {
-                        return view('bidding-info.loan');
-                    }
+                    else return view('bidding-info.loan');
 
             }else $user_id = Auth::id();
-
-            $user = User::find($user_id);
-            $user->addr   = $request->input('addr');
-            $user->status = 2;
-            $user->save();
 
             /**
              ＊存管用户一次只能借款20万，
@@ -62,12 +59,17 @@ class LoanController extends Controller
              **/
 
             //添加贷款数据
-            $loan_info['type']    = 2;
+            $loan_info['type']    = 2; // 2个人, 1企业
             $loan_info['status']  = 1;
             $loan_info['user_id'] = $user_id;
             $loan_info['amount']  = $request->input('amount');
             $loan_info['period']  = $request->input('period');
             $loan_info['mortgage']  = $request->input('mortgage');
+            $loan_info['remarks']   = '正在审核中...';
+
+            if($loan_info['type'] == 2 && $loan_info['amount'] > 200000)  return '个人额度一次只能借款20万';
+            if($loan_info['type'] == 1 && $loan_info['amount'] > 1000000) return '企业额度一次只能借款100万';
+            if($loan->is_mortgage() == 1) return '你已经申请过借款了！';
 
             DB::table('loans')->insert($loan_info);
             return redirect('loan/list');
@@ -84,12 +86,12 @@ class LoanController extends Controller
 
     public function list(Request $request)
     {
+
+        // search data
         if($request->isMethod('post')){
             $input = $request->all('');
-
-            return $input;
-
         }
+
         return view('bidding-info.list');
     }
 
@@ -104,6 +106,10 @@ class LoanController extends Controller
             ->limit($limit)
             ->orderBy('updated_at')
             ->get();
+
+        foreach ($result as $key => $value) {
+            $value->mortgage = ($value->mortgage == 1) ? '月' : '日';
+        }
         return ($result) ? ['code'=>0,'count'=>count($result),'data'=>$result] : ['code'=>1];
     }
 
@@ -112,8 +118,12 @@ class LoanController extends Controller
     {
         $loan = Loan::find($id);
         $n = ($loan['status'] == 1 || $loan['status'] == 3) ? 4 : 3;
-        $loan->status = $n;
+        $m = ($n == 4) ? '已审核通过' : '审核未通过';
+
+        $loan->status  = $n;
+        $loan->remarks = $m;
         $st = $loan->save();
+
         return ($st) ? ['message'=> 0] : ['message'=>'error'];
     }
 
