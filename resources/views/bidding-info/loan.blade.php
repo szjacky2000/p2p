@@ -1,25 +1,9 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jacky
- * Date: 19-1-11
- * Time: 上午11:29
- */
-//use Auth;
-?>
+@extends('layouts.master_no_sidebar')
+@section('title', 'person center')
+@section('content')
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/com_pc.css" />
     <link rel="stylesheet" href="../css/bid.css" />
-    <title></title>
-</head>
-<body>
-<div id="head">
 
-</div>
 <div id="bid_img">
     <img src="../img/banner.png"/>
 </div>
@@ -72,13 +56,13 @@
             <p>
                 <span>所在地区</span>
                 <label style="border: none;padding: 0;">
-                    <select name="addr">
+                    <select name="province">
                         <option value="gd">广东省</option>
                     </select>
-                    <select>
+                    <select name="city">
                         <option>深圳市</option>
                     </select>
-                    <select>
+                    <select name="district">
                         <option>罗湖区</option>
                         <option>福田区</option>
                         <option>南山区</option>
@@ -136,7 +120,4 @@
         </div>
     </div>
 </div>
-<div id="foot">
-</div>
-</body>
-</html>
+@endsection

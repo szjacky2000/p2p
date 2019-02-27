@@ -40,7 +40,6 @@ class LoanController extends Controller
                     $user_info['name']   = $request->input('name');
                     $user_info['addr']   = $request->input('addr');
                     $user_info['phone']  = $request->input('phone');
-                    $user_info['status'] = $request->input('status');
 
                     if(!empty($user_info['phone'])) {
 
@@ -60,7 +59,6 @@ class LoanController extends Controller
 
             //添加贷款数据
             $loan_info['type']    = 2; // 2个人, 1企业
-            $loan_info['status']  = 1;
             $loan_info['user_id'] = $user_id;
             $loan_info['amount']  = $request->input('amount');
             $loan_info['period']  = $request->input('period');
@@ -113,7 +111,7 @@ class LoanController extends Controller
         return ($result) ? ['code'=>0,'count'=>count($result),'data'=>$result] : ['code'=>1];
     }
 
-    //ajax 风控审核  1:进行中 2:审核中的 3:未通过 4:通过
+    //ajax 风控审核  1:进行中 3:未通过 4:通过
     public function investigate($id)
     {
         $loan = Loan::find($id);

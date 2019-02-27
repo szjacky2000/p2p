@@ -17,3 +17,5 @@ include('backstage.php');
 //发标路由
 include('bid.php');
 
+//person center
+include('personcenter.php');

@@ -15,7 +15,7 @@
 <div id="head_2">
 	<div class="head_2_box">
 		<div class="logo">
-			<a href="#">
+			<a href="/">
 				<img src="../img/pc_logo.png"/>
 			</a>
 		</div>
@@ -34,7 +34,7 @@
 			<a href="{{ route('reg_1') }}">{{ __('注册') }}</a>
 			@endguest
 			@auth
-				<a> {{ session('username') }} </a>
+				<a href="{{ url('personcenter') }}"> {{ session('username') }} </a>
 				<a href="{{ route('exit') }}">{{ __('退出') }}</a>
 			@endauth
 		</div>

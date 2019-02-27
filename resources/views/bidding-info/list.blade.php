@@ -1,28 +1,10 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jacky
- * Date: 19-1-11
- * Time: 上午11:29
- */
-//use Auth;
-?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="stylesheet" href="../css/com_pc.css" />
+@extends('layouts.master_no_sidebar')
+@section('title', 'person center')
+@section('content')
     <link rel="stylesheet" href="../css/bid.css" />
     <link rel="stylesheet" href="../css/bid.css" />
-    <title></title>
-</head>
-<body>
-
-<script type="text/javascript" src="../js/jq.js"></script>
-<script type="text/javascript" src="../js/layui/layui.js"></script>
-<link rel="stylesheet" href="../js/layui/css/layui.css">
+    <script type="text/javascript" src="../js/layui/layui.js"></script>
+    <link rel="stylesheet" href="../js/layui/css/layui.css">
 <div id="fb">
     <div class="fblc_2">
         <form method="POST" action="{{ url('loan/add') }}">
@@ -138,5 +120,5 @@
         });
     </script>
 </div>
-</body>
-</html>
+
+@endsection
