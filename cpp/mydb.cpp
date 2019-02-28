@@ -32,6 +32,10 @@ bool MyDB::initDB(string host,string user,string passwd,string db_name)
         cout << "Error: " << mysql_error(mysql);  
         exit(1);  
     }  
+
+    //chinese show 
+    if (!mysql_set_character_set(mysql, "utf8")) mysql_character_set_name(mysql);
+
     return true;  
 }
 
@@ -56,11 +60,13 @@ bool MyDB::exeSQL(string sql)
                 row=mysql_fetch_row(result);
                 if(row<0) break;
 
+                vector<string> res;
+
                 for(int j=0;j<num_fields;j++)  //输出每一字段
                 {
-                    cout<<row[j]<<"\t\t";
+                    // cout<<row[j]<<"\t\t";
                 }
-                cout<<endl;
+
             }
 
         }
