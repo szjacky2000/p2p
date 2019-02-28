@@ -8,7 +8,7 @@ void MyDataBase::disconnect() {
 	sql = nullptr;
 	res = nullptr;
 	connect_flag = false;
-	cout << "mysql任务已完成，现在断开链接！" << endl;
+	cout << "mysql任务已完成，现在断开连接！" << endl;
 }
 
 MyDataBase::MyDataBase() {
@@ -47,7 +47,7 @@ void MyDataBase::connect(const string host, const string user, const string pass
 		cout << "connect error!" << endl;
 		return;
 	}
-	cout << "mysql服务器现在已连...!" << endl;
+	cout << "mysql服务器现在已连接..." << endl;
 }
 
 void MyDataBase::showdb() {
