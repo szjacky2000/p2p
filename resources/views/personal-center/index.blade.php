@@ -3,6 +3,7 @@
 @section('content')
 
 		<link rel="stylesheet" href="../css/personalcenter.css" />
+		<script src="../js/bank.js"></script>
 
 		<div id="mysettings">
 			<p class="my_top">我的金抽屉</p>
@@ -105,32 +106,50 @@
 
 
 		<div id="cover_2" style="display: none;">
+			<form id="bank_form" method="post" action="../personcenter/bank/add">
+				@csrf
 			<div class="cover_box">
 				<h3>添加银行卡</h3>
 				<div class="cblr_1">
 					<span class="cbo_left">开户人姓名</span>
-					<span class="cbo_left">罗其万</span>
+					<span class="cbo_left">{{ session('username') }}</span>
 				</div>
 				<div class="cblr_1">
 					<span class="cbo_left">银行卡号</span>
-					<input type="" name="" id="" value="" class="sel_2" placeholder="请输入银行卡号"/>
+					<input type="" name="num" id="" value="" class="sel_2" placeholder="请输入银行卡号"/>
 					<span class="cbo_left">选择银行</span>
-					<select class="sel_3"/><option>请选择</option></select>
+					<select class="sel_3" name="name">
+						<option>-- 请选择 --</option>
+						<option>招商银行</option>
+						<option>工商银行</option>
+						<option>农业银行</option>
+						<option>中国银行</option>
+						<option>平安银行</option>
+						<option>建设银行</option>
+						<option>邮政储蓄银行</option>
+						<option>交通银行</option>
+						<option>民生银行</option>
+						<option>华夏银行</option>
+						<option>兴业银行</option>
+						<option>光大银行</option>
+						<option>浦发银行</option>
+					</select>
 				</div>
 				<div class="cblr_1">
 					<span class="cbo_left">开户所在地</span>
 					<select class="sel_3"/><option>请选择</option></select>
-					<input type="" name="" id="" value=""  class="sel_2" placeholder="请输入开户支行的名称" style="margin-left: 10px;width: 340px;"/>					
+					<input type="" name="opening_bank" id="" value=""  class="sel_2" placeholder="请输入开户支行的名称" style="margin-left: 10px;width: 340px;"/>					
 					
 				</div>
 				<div class="cblr_1">
 					<span class="cbo_left">手机验证码</span>
-					<input type="" name="" id="" value="" class="sel_2" placeholder="请输入验证码" style="width: 110px;"/>
+					<input type="" name="code" id="" value="" class="sel_2" placeholder="请输入验证码" style="width: 110px;"/>
 					<span class="cbo_fa">发送验证码</span>
 
 				</div>
 				<a href="" class="cb_ti" style="margin-top: 50px;">提交</a>	
 			</div>
+			</form>
 		</div>
 
 		<div id="cover_3" style="display: none;">
@@ -140,7 +159,7 @@
 					<li>
 						<span class="cb_left">选择银行卡</span>
 						<label class="cb_right" >
-							<select class="sel_1">
+							<select class="sel_1" name="">
 								<option>请选择</option>
 								<option>1择</option>
 								<option>请2</option>
@@ -196,9 +215,23 @@
 	        $("#cover_2").show(); 
 	    });
 
+	    //cb_ti create bank submit 
+	    var cb_ti = $(".cb_ti");
 
+	    cb_ti.click(function(){
 
+			var formname = 'bank_form';
+			var t = new Account(formname);
+			var url = 'http://192.168.1.186/personcenter/bank/add';
+			t.get_form_data().save(url);
+
+			$("#cover_2").hide();
+	    	return false;
+	    })
+
+	    return false;
 	});
+
 </script>
 
 @endsection

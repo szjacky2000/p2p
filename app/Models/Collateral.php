@@ -30,7 +30,6 @@ class Collateral extends Model
     public function addCollaterals($data)
     {
         $where['name'] = $data['name'];
-        $where['created_at'] = date('Y-m-d H:i:s',time());
         $where['pid'] = $data['pid'];
         $where['user_id']= $data['user_id'];
         $where['status']=1;
@@ -46,7 +45,6 @@ class Collateral extends Model
     public function updateCollaterals($data)
     {
         $where['name'] = $data['name'];
-        $where['updated_at'] = date('Y-m-d H:i:s',time());
         $where['pid'] = $data['pid'];
         $where['user_id']= $data['user_id'];
         $where['status']=1;
@@ -62,8 +60,6 @@ class Collateral extends Model
     public function setCollaterals($data)
     {
         $where['name'] = $data['name'];
-        $where['updated_at'] = date('Y-m-d H:i:s',time());
-
 
         $data = DB::table('collaterals')->where('id',$data['id'])->update($where);
         return $data;
@@ -77,7 +73,6 @@ class Collateral extends Model
     public function insterCollaterals($data)
     {
         $where['name'] = $data['name'];
-        $where['created_at'] = date('Y-m-d H:i:s',time());
         $where['pid'] = 0;
         $where['user_id']= $data['user_id'];
         $where['status']=1;

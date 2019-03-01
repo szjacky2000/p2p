@@ -6,4 +6,4 @@ MyDataBase.o : MyDataBase.cpp
 some.o : some.cpp
 	g++ -std=c++11 -c some.cpp
 clean:
-	rm *.o
+	rm *.o 
