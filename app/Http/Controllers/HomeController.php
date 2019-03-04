@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-         $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -29,6 +29,12 @@ class HomeController extends Controller
         $request->session()->put('username', $user_info->name);
         $request->session()->put('phone', $user_info->phone);
         return view('auth.login_success');
+    }
+
+    public function info()
+    {
+        phpinfo();
+        exit;
     }
 
 }

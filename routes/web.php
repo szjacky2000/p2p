@@ -1,5 +1,6 @@
 <?php
 Route::get('/','HomeController@index');
+Route::get('/info','HomeController@info');
 Route::get('/home', 'HomeController@index')->name('home');
 
 //about and sub module
