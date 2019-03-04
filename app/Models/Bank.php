@@ -26,7 +26,8 @@ class Bank extends Model
         ]);
     }
 
-    private function is_exists($num){
+    public function is_exists($num)
+    {
         return DB::table('banks')->where('num', $num)->exists();
     }
 
@@ -34,6 +35,11 @@ class Bank extends Model
     private function is_login()
     {
         return Auth::check();
+    }
+
+    public function lists()
+    {
+        return DB::table('banks')->where('user_id', Auth::id())->get();
     }
 
 }
